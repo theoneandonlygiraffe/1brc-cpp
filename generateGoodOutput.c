@@ -26,11 +26,13 @@ static int cmp(const void *ptr_a, const void *ptr_b) {
   return strcmp(((struct result *)ptr_a)->city, ((struct result *)ptr_b)->city);
 }
 
-int main(int argc, const char **argv) {
-  const char *file = "measurements.txt";
-  if (argc > 1) {
-    file = argv[1];
+int main(int argc, char **argv) {
+  if (argc != 2) {
+    fprintf(stderr, "usage: generateGoodOutput <file>\n");
+    return EXIT_FAILURE;
   }
+  
+  char *file = argv[1];
 
   FILE *fh = fopen(file, "r");
   if (!fh) {

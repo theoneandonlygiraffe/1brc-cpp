@@ -447,19 +447,19 @@ double rand_nd(double mean, double stddev) {
 }
 
 int main(int argc, char **argv) {
-  if (argc <= 1) {
-    fprintf(stderr, "usage: create-sample <amount>\n");
+  if (argc != 3) {
+    fprintf(stderr, "usage: generateInput <file> <amount>\n");
     return EXIT_FAILURE;
   }
 
   clock_t tstart = clock();
-  FILE *fh = fopen("measurements.txt", "w");
+  FILE *fh = fopen(argv[1], "w");
   if (!fh) {
     perror("error opening file for writing");
     return EXIT_FAILURE;
   }
 
-  long n = strtol(argv[1], NULL, 10);
+  long n = strtol(argv[2], NULL, 10);
   int ncities = sizeof(data) / sizeof(data[0]);
   for (int i = 0; i < n; i++) {
     int c = rand() % ncities;
