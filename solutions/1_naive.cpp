@@ -5,10 +5,10 @@
 #include <stdlib.h> 
 
 struct data {
-    float sum;
-    float n;
-    float min;
-    float max;
+    float sum = 0;
+    float n = 0;
+    float min = 99.9f;
+    float max = -99.9f;
 };
 
 int main(int argc , char* argv[] ){
@@ -28,24 +28,16 @@ int main(int argc , char* argv[] ){
         getline(file,string_temp);
         float temp = std::stof(string_temp);
         
-        if ( map.contains(name)){
-            data& d = map[name];
-            d.sum = d.sum + temp;
-            d.n = d.n + 1;
-            if ( d.min > temp ){
-                d.min = temp;
-            }
-            if ( d.max < temp ){
-                d.max = temp;
-            }
-        } else {
-            data d;
-            d.sum = temp;
-            d.n = 1;
+        data& d = map[name];
+        d.sum = d.sum + temp;
+        d.n = d.n + 1;
+        if ( d.min > temp ){
             d.min = temp;
-            d.max = temp;
-            map[name] = d;
         }
+        if ( d.max < temp ){
+            d.max = temp;
+        }
+        
         
         
         //std::cout << name << '\n';
