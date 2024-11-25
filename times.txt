@@ -2,3 +2,8 @@ s_1 - stdlib hashmap
 real	5m38.348s
 user	5m28.129s
 sys	0m6.525s
+
+s_2 - int math
+real	5m21.736s
+user	5m11.029s
+sys	0m6.879s
