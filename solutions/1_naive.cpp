@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <stdlib.h> 
 
 struct data {
@@ -16,7 +16,7 @@ int main(int argc , char* argv[] ){
     std::string string_temp;
     std::ifstream file;
     
-    std::map<std::string, data> map;
+    std::unordered_map<std::string, data> map;
     
     file.open(argv[1]);
     if (!file.is_open()){
