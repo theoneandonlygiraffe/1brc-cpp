@@ -4,7 +4,12 @@ user	5m28.129s
 sys	0m6.525s
 
 s_2 - int math
-real	3m51.916s
-user	3m42.767s
-sys	0m6.258s
+real	3m47.678s
+user	3m40.952s
+sys	0m5.362s
+
+s_2.1 better itoc and ctoi
+real	3m14.754s
+user	3m7.526s
+sys	0m5.771s
 

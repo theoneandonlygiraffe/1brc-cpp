@@ -11,74 +11,42 @@ struct data {
     int max = -999;
 };
 
-int ctoi(char c){
-    switch (c){
-        case '0' : return 0;
-        break;
-        case '1' : return 1;
-        break;
-        case '2' : return 2;
-        break;
-        case '3' : return 3;
-        break;
-        case '4' : return 4;
-        break;
-        case '5' : return 5;
-        break;
-        case '6' : return 6;
-        break;
-        case '7' : return 7;
-        break;
-        case '8' : return 8;
-        break;
-        case '9' : return 9;
-        break;
-    }
+int ctoi(char& c){ 
+    return (int) c - '0';
 }
 
-char itoc(int i){
-    switch (i){
-        case 0 : return '0';
-        break;
-        case 1 : return '1';
-        break;
-        case 2 : return '2';
-        break;
-        case 3 : return '3';
-        break;
-        case 4 : return '4';
-        break;
-        case 5 : return '5';
-        break;
-        case 6 : return '6';
-        break;
-        case 7 : return '7';
-        break;
-        case 8 : return '8';
-        break;
-        case 9 : return '9';
-        break;
-    }
+char itoc(int& i){
+    return (char) i + '0';
 }
 
 void char_to_int(char* c, int& i){
-    //int i;
     i = ctoi(c[4]);
     i = i + (ctoi(c[2]) * 10);
     i = i + (ctoi(c[1]) * 100);
     if (c[0] == '-') {
         i = i * -1;
     }
-    //return i;
 }
 
 void int_to_char(int i, char* c){
+    int b1;
+    int b10;
+    int b100;
+    
     if(i < 0){
         c[0] = '-';
+        i = i * -1;
     } else {
-        c[0] = '0';
+        c[0] = ' ';
     }
-    //TODO
+    b1 = i % 10;
+    b10 = (i % 100) / 10;
+    b100 = (i % 1000) / 100;
+    
+    c[1] = itoc(b100);
+    c[2] = itoc(b10);
+    c[3] = '.';
+    c[4] = itoc(b1);
 }
 
 // 0 1 2 3 4
@@ -139,7 +107,6 @@ int main(int argc , char* argv[] ){
         getline(file,string_temp);
         pad_number(string_temp.c_str(),padded_number);
         char_to_int(padded_number, temp);
-        //std::cout << padded_number << '=' << temp << '\n';
         
         data& d = map[name];
         d.sum = d.sum + temp;
@@ -150,11 +117,6 @@ int main(int argc , char* argv[] ){
         if ( d.max < temp ){
             d.max = temp;
         }
-        
-        
-        
-        //std::cout << name << '\n';
-        //std::cout << temp << '\n';
 
     }
     file.close();
@@ -162,7 +124,20 @@ int main(int argc , char* argv[] ){
     for (const auto& element: map){
         std::string name = element.first;
         const data& d = element.second;
-        std::cout << name << '=' << (float)d.min/10 << '/' << ((float)d.sum/d.n)/10 << '/' << (float)d.max/10 << '\n';
+        char min[6];
+        char mid[6];
+        char max[6];
+        
+        min[5] ='\0';
+        mid[5] ='\0';
+        max[5] ='\0';
+        
+        int_to_char(d.min, min);
+        int_to_char((d.sum/d.n), mid);
+        int_to_char(d.max, max);
+        
+        
+        std::cout << name << '=' << min << '/' << mid << '/' << max << '\n';
     }
     
     return EXIT_SUCCESS;
