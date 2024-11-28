@@ -8,8 +8,12 @@ real	3m47.678s
 user	3m40.952s
 sys	0m5.362s
 
-s_2.1 better itoc and ctoi
+s_2.1 better itoc and ctoi + inline
 real	3m14.754s
 user	3m7.526s
 sys	0m5.771s
 
+s_3 branch avoidance
+real	1m32.719s
+user	1m25.706s
+sys	0m5.805s
