@@ -17,3 +17,20 @@ s_3 branch avoidance
 real	1m32.719s
 user	1m25.706s
 sys	0m5.805s
+
+ANOMALY: 
+avoiding branching in int_to_char and char_to_int helped a lot. 
+avoiding branching in padding function didn't help at all. Must investigate.
+Distribution:
+count: 1000000000
+
+negative: 87780411 ->    8.8%   // ex. -99
+
+point1: 178191570  ->   17.8%   // ex.   9.9
+point2: 801638107  ->   80.1%   // ex.  99.9
+no point1 0                     // ex.   9
+no point2 20170323 ->    2.0%   // ex.  99
+
+Thesis: having a shorter calculation for 80% of the time migth be worth the
+occasional pipeline flush. -> Goal should be to optimize for point2 case.
+Branch prediction should do the rest. __builtin_expect?
